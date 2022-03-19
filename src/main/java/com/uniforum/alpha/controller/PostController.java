@@ -32,6 +32,10 @@ public class PostController {
 //		return new ResponseEntity<Post>(postService.savePost(post),HttpStatus.CREATED);
 //	}
 //	
+	@GetMapping("/test")
+	public String test() {
+		return "<h1> this a test api</h1>";
+	}
 }
 
 
