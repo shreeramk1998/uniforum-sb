@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -16,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "POST", schema = "TYF_ACCOUNT")
-public class Post {
+public class Post extends RowDetails {
 		 @Id
 		 @GeneratedValue(strategy = GenerationType.IDENTITY)
 		 @Column(name = "POST_NUM")
@@ -31,10 +33,14 @@ public class Post {
 		 @Column(name = "TOPIC_NUM")
 		 private Long topicNum;
 		 
-		 @Column(name = "USER_NUM")
-		 private Long userNum;
+		 @ManyToOne
+		 @JoinColumn(name = "USER_NUM")
+		 private User user;
 		 
-		 @Column(name = "POST_TYPE")
-		 private Long postType;
+		 @ManyToOne
+		 @JoinColumn(name = "POST_TYPE")
+		 private TypeRef postType;
 		 
+		 @Column(name = "title")
+		 private String title;
 }
