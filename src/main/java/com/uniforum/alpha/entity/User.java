@@ -33,9 +33,12 @@ public class User {
 	@Column(name = "USER_NUM")
 	private Long userNum;
 
-	@Column(name = "NAME")
-	private String name;
+	@Column(name = "FIRST_NAME")
+	private String firstName;
 
+	@Column(name = "LAST_NAME")
+	private String lastName;
+	
 	@Column(name = "ID", unique = true)
 	private String id;
 
@@ -46,5 +49,10 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "USER_ROLE", schema = "TYF_USER", joinColumns = @JoinColumn(name = "USER_NUM"), inverseJoinColumns = @JoinColumn(name = "ROLE_NUM"))
 	private List<Role> roleList;
-
+	
+	@Column(name = "EMAIL_ID")
+	private String emailId;
+	
+	@Column(name = "SIGNATURE")
+	private String signature;
 }

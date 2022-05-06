@@ -52,6 +52,7 @@ public class AuthoraiztionTokenFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 		// TODO Auto-generated method stub
+		System.out.println(request.getRequestURI().equals(AppConstants.LOGIN_PATH) || !request.getRequestURI().contains("/api/"));
 		return request.getRequestURI().equals(AppConstants.LOGIN_PATH) || !request.getRequestURI().contains("/api/");
 	}
 

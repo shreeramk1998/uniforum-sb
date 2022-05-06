@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,5 +39,6 @@ public class TypeGroupRef {
 	
 	@OneToMany(mappedBy = "typeGroupRef", orphanRemoval = true, cascade = CascadeType.ALL)
 	@JsonManagedReference
+	@ToString.Exclude
 	private List<TypeRef> typeRefList;
 }

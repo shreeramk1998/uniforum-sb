@@ -23,20 +23,15 @@ public class ForumUserDetail implements UserDetails {
 	private String username;
 	private String password;
 	private List<SimpleGrantedAuthority> authorities;
+	private User user;
 	
 	public ForumUserDetail(User user) {
 		this.authorities = user.getRoleList().stream().map(role -> new SimpleGrantedAuthority(role.getName()))
 				.collect(Collectors.toList());
 		this.password = user.getPassword();
 		this.username = user.getId();
+		this.user = user;
 	}
-	
-//	public ForumUserDetail(String username,String password, Collection<SimpleGrantedAuthority> authorities) {
-//		super();
-//		this.username = username;
-//		this.password = password;
-//		this.authorities = authorities.stream().collect(Collectors.toCollection(ArrayList::new));
-//	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -80,4 +75,7 @@ public class ForumUserDetail implements UserDetails {
 		return true;
 	}
 
+	public User getUser() {
+		return this.user;
+	}
 }

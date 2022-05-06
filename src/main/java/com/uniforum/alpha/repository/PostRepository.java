@@ -13,5 +13,14 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
 	@Query(value = PostQueryConstants.FIND_ALL_POST_BY_USER)
 	public List<Post> findAllByUserNum(@Param("userNum") Long userNum);
+
+	//	@Query(value = PostQueryConstants.FIND_POST_BY_USER)
+//	public Post findByUserNum(@Param("loggedInUserNum") Long loggedInUserNum, @Param("postNum") Long userNum);
+//	
 	
+	@Query(value = PostQueryConstants.FIND_ALL_POST)
+	public List<Post> findAllPosts();
+	
+	@Query(value = PostQueryConstants.FIND_POST_BY_ID)
+	public Post findByPostNum(@Param("postNum") Long postNum);
 }

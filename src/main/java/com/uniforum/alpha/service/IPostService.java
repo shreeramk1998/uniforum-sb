@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.uniforum.alpha.entity.Comment;
 import com.uniforum.alpha.entity.Post;
+import com.uniforum.alpha.entity.UserPostXref;
 
 public interface IPostService {
-	
+
 	public Post savePost(Post post);
 
 	public List<Post> getPosts();
@@ -15,8 +16,8 @@ public interface IPostService {
 
 	public Comment saveComment(Comment comment);
 
-	public List<Comment> findCommentReplies(Long commentNum);
-
 	public List<Post> getUserPosts(Long userNum);
+
+	public Post upvotePost(UserPostXref userPostXref);
 
 }

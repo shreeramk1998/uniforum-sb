@@ -14,7 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniforum.alpha.model.ForumUserDetail;
+import com.uniforum.alpha.model.LoginResponseVO;
 import com.uniforum.alpha.util.JWTUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,12 +46,21 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authentication) throws IOException, ServletException {
+		
 		JWTUtil jwtUtil = new JWTUtil();
 		ForumUserDetail forumUserDetail = (ForumUserDetail) authentication.getPrincipal();
 		String jwt = jwtUtil.generateToken(forumUserDetail);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		LoginResponseVO loginResponseVO = new LoginResponseVO();
+		loginResponseVO.setUser(forumUserDetail.getUser());
+		loginResponseVO.setJwt(jwt);
+		String loginResponseVOString = mapper.writeValueAsString(loginResponseVO);
+		
 		response.setHeader("Authorization", "Bearer ".concat(jwt));
+		response.setHeader("Content-Type","application/json;charset=UTF-8");
+		response.getWriter().write(loginResponseVOString);
 		response.setStatus(HttpStatus.ACCEPTED.value());
-//		chain.doFilter(request, response);
 	}
 	
 
